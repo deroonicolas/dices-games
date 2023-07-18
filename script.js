@@ -12,14 +12,14 @@ class Player {
       this.roundScore = 0;
     } else {
       this.roundScore += diceOutput;
-      this.globalScore += diceOutput;
     }
     return diceOutput;
   }
 
-  hold() {
-    this.globalScore += this.roundScore;
+  hold(roundScore) {
+    this.globalScore += roundScore;
     this.roundScore = 0;
+    return this.globalScore;
   }
 
   reset() {
@@ -50,9 +50,6 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
   if (gamePlaying) {
     // Get dice and display it
     const dice = activePlayer.rollDice()
-    let diceDom = document.querySelector('.dice')
-    diceDom.style.display = 'block'
-    diceDom.src = 'dice-' + dice + '.png'
 
     // Update UI
     if (dice === 1) {
@@ -61,18 +58,25 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     } else {
       document.querySelector('#current-' + activePlayer.number).textContent = activePlayer.roundScore
     }
-
+    let diceDom = document.querySelector('.dice')
+    diceDom.style.display = 'block'
+    diceDom.src = 'dice-' + dice + '.png'
   }
 })
 
 // Add event listener to 'Encaisser' buton
 document.querySelector('.btn-hold').addEventListener('click', function () {
   if (gamePlaying) {
+    
+    activePlayer = getActivePlayer()
+    const holding = Number.parseInt(document.querySelector('#current-' + activePlayer.number).textContent)
+    const globalScore = activePlayer.hold(holding)
 
-    //Update the UI
-    document.querySelector('#score-' + activePlayer.number).textContent = activePlayer.globalScore
+    // Update the UI
+    document.querySelector('#score-' + activePlayer.number).textContent = globalScore
+    document.querySelector('#current-' + activePlayer.number).textContent = '0'
 
-    //Check if player wins the game
+    // Check if player wins the game
     if (activePlayer.globalScore >= winScore) {
       alert('La joueur ' + String.toString(activePlayer) + 'a gagné !')
       gamePlaying = false
