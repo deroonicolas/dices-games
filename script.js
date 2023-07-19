@@ -53,21 +53,21 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 
     // Update UI
     if (dice === 1) {
-      document.querySelector('#score-' + activePlayer.number).textContent = '0'
+      document.querySelector('#score-' + activePlayer.number).textContent = activePlayer.globalScore
       nextPlayer()
     } else {
       document.querySelector('#current-' + activePlayer.number).textContent = activePlayer.roundScore
+      const diceDom = document.querySelector('.dice')
+      diceDom.style.display = 'block'
+      diceDom.src = 'dice-' + dice + '.png'
     }
-    let diceDom = document.querySelector('.dice')
-    diceDom.style.display = 'block'
-    diceDom.src = 'dice-' + dice + '.png'
   }
 })
 
 // Add event listener to 'Encaisser' buton
 document.querySelector('.btn-hold').addEventListener('click', function () {
   if (gamePlaying) {
-    
+
     activePlayer = getActivePlayer()
     const holding = Number.parseInt(document.querySelector('#current-' + activePlayer.number).textContent)
     const globalScore = activePlayer.hold(holding)
