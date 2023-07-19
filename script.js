@@ -46,8 +46,8 @@ class Player {
 // Global var
 let activePlayer, gamePlaying
 const winScore = 100
-const player1 = new Player(0, 0, 0)
-const player2 = new Player(0, 0, 1)
+let player1 = null
+let player2 = null
 
 // (RE)Init the game
 init()
@@ -135,6 +135,9 @@ function nextPlayer() {
  * Function (RE)init all elements from scratch
  */
 function init() {
+
+  player1 = new Player(0, 0, 0)
+  player2 = new Player(0, 0, 1)
 
   // Set the game is in course
   gamePlaying = true
