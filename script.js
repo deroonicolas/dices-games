@@ -93,7 +93,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 
     // Check if player wins the game
     if (activePlayer.globalScore >= winScore) {
-      alert('La joueur ' + String.toString(activePlayer) + 'a gagné !')
+      alert('La joueur ' + activePlayer.number + ' a gagné !')
       gamePlaying = false
       init()
     } else {
