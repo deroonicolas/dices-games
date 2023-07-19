@@ -1,4 +1,11 @@
 /*********** BUSINESS PART **********/
+/**
+ * Represents a Player.
+ * @constructor
+ * @param {integer} roundScore - The rounded score of the player.
+ * @param {integer} globalScore - The global score of the player.
+ * @param {integer} nomber - The player's number.
+ */
 class Player {
   constructor(roundScore, globalScore, number) {
     this.roundScore = roundScore;
@@ -6,6 +13,10 @@ class Player {
     this.number = number;
   }
 
+  /**
+   * Function that represents the Roll operation and populate the player object
+   * @returns {integer} The number of the dice
+   */
   rollDice() {
     const diceOutput = Math.floor(Math.random() * 6) + 1;
     if (diceOutput === 1) {
@@ -16,15 +27,16 @@ class Player {
     return diceOutput;
   }
 
+  /**
+   * Function that represents the Hold operation, populate the player object
+   *  and returns the global score
+   * @param {integer} roundScore The obtained rounded score
+   * @returns {integer} The global score of the player
+   */
   hold(roundScore) {
     this.globalScore += roundScore;
     this.roundScore = 0;
     return this.globalScore;
-  }
-
-  reset() {
-    this.totalScore = 0;
-    this.turnScore = 0;
   }
 
 }
@@ -39,15 +51,17 @@ const player2 = new Player(0, 0, 1)
 
 // (RE)Init the game
 init()
-// Add listener for the 'New Game' button
+
+// Add event listener to 'New Game' buton
 document.querySelector('.btn-new').addEventListener('click', init)
 
-//Roll Dice button implementation
+// Add event listener to 'Roll' buton
 document.querySelector('.btn-roll').addEventListener('click', function () {
 
   activePlayer = getActivePlayer();
 
   if (gamePlaying) {
+
     // Get dice and display it
     const dice = activePlayer.rollDice()
 
@@ -64,8 +78,9 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
   }
 })
 
-// Add event listener to 'Encaisser' buton
+// Add event listener to 'Hold' buton
 document.querySelector('.btn-hold').addEventListener('click', function () {
+
   if (gamePlaying) {
 
     activePlayer = getActivePlayer()
@@ -85,8 +100,13 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
       nextPlayer()
     }
   }
+
 })
 
+/**
+ * Function that returns the active player
+ * @returns {Player} The active player
+ */
 function getActivePlayer() {
   const currentPanel = document.querySelector('.player-0-panel')
   if (currentPanel.classList.contains('active')) {
@@ -95,6 +115,9 @@ function getActivePlayer() {
   return player2
 }
 
+/**
+ * Function for UI design for the next player
+ */
 function nextPlayer() {
 
   // Reinit the current scores to 0 
@@ -108,7 +131,9 @@ function nextPlayer() {
 
 }
 
-// (RE)init all elements from scratch
+/**
+ * Function (RE)init all elements from scratch
+ */
 function init() {
 
   // Set the game is in course
