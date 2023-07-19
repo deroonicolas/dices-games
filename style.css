@@ -21,7 +21,6 @@ body {
   color: #222;
 }
 
-/* New game, roll and hold buttons style */
 button {
   position: absolute;
   width: 200px;
@@ -52,11 +51,11 @@ button:hover {
 
 /* Button on middle size */
 .p-6 {
-  top: 400px;
+  top: 350px;
 }
 
 .p-7 {
-  top: 450px;
+  top: 400px;
 }
 
 /*# sourceMappingURL=style.css.map */
