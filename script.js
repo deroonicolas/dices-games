@@ -17,7 +17,7 @@ class Player {
    * Function that represents the Roll operation and populate the player object
    * @returns {integer} The number of the dice
    */
-  rollDice() {
+  rollDice = () => {
     const diceOutput = Math.floor(Math.random() * 6) + 1;
     if (diceOutput === 1) {
       this.roundScore = 0;
@@ -33,7 +33,7 @@ class Player {
    * @param {integer} roundScore The obtained rounded score
    * @returns {integer} The global score of the player
    */
-  hold(roundScore) {
+  hold = (roundScore) => {
     this.globalScore += roundScore;
     this.roundScore = 0;
     return this.globalScore;
@@ -107,7 +107,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
  * Function that returns the active player
  * @returns {Player} The active player
  */
-function getActivePlayer() {
+getActivePlayer = () => {
   const currentPanel = document.querySelector('.player-0-panel')
   if (currentPanel.classList.contains('active')) {
     return player1
@@ -118,7 +118,7 @@ function getActivePlayer() {
 /**
  * Function for UI design for the next player
  */
-function nextPlayer() {
+nextPlayer = () => {
 
   // Reinit the current scores to 0 
   document.querySelector('#current-0').textContent = 0
@@ -134,7 +134,7 @@ function nextPlayer() {
 /**
  * Function (RE)init all elements from scratch
  */
-function init() {
+init = () => {
 
   player1 = new Player(0, 0, 0)
   player2 = new Player(0, 0, 1)
